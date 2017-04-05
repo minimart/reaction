@@ -15,7 +15,7 @@
         "paymentSettings": {
           "stripeLabel": "Stripe",
           "stripeSettingsLabel": "Stripe",
-          "stripeSettingsDescription": "Nemate ID klijenta pruga API?",
+          "stripeSettingsDescription": "",
           "stripeSettingsGetItHere": "Nabavite ga ovdje"
         }
       }

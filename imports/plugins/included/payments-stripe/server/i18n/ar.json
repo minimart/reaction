@@ -6,16 +6,16 @@
     "reaction-payments": {
       "admin": {
         "shortcut": {
-          "stripeLabel": "شريط"
+          "stripeLabel": "Stripe"
         },
         "dashboard": {
-          "stripeLabel": "شريط",
-          "stripeDescription": "المدفوعات شريط"
+          "stripeLabel": "Stripe",
+          "stripeDescription": "المدفوعات Stripe"
         },
         "paymentSettings": {
-          "stripeLabel": "شريط",
-          "stripeSettingsLabel": "شريط",
-          "stripeSettingsDescription": "لم يكن لديك معرف العميل الشريط API؟",
+          "stripeLabel": "Stripe",
+          "stripeSettingsLabel": "Stripe",
+          "stripeSettingsDescription": "",
           "stripeSettingsGetItHere": "أحضره هنا"
         }
       }

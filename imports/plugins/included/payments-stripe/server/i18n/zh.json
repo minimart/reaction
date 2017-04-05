@@ -6,16 +6,16 @@
     "reaction-payments": {
       "admin": {
         "shortcut": {
-          "stripeLabel": "条纹"
+          "stripeLabel": "Stripe"
         },
         "dashboard": {
-          "stripeLabel": "条纹",
-          "stripeDescription": "条纹支付"
+          "stripeLabel": "Stripe",
+          "stripeDescription": ""
         },
         "paymentSettings": {
-          "stripeLabel": "条纹",
-          "stripeSettingsLabel": "条纹",
-          "stripeSettingsDescription": "不要有条纹API客户端ID？",
+          "stripeLabel": "Stripe",
+          "stripeSettingsLabel": "",
+          "stripeSettingsDescription": "",
           "stripeSettingsGetItHere": "在这里获得"
         }
       }
