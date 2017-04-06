@@ -8,7 +8,7 @@ import { purchaseAddressSchema, parcelSchema } from "../lib/shippoApiSchema";
 export const ShippoApi = {
   methods: {}
 };
-
+const shippoVersion = "2016-10-25";
 
 /**
  * Retrieves the address objects stored in Shippo Account
@@ -29,6 +29,7 @@ ShippoApi.methods.getAddressList = new ValidatedMethod({
   }).validator(),
   run({ apiKey }) {
     const shippoObj = new Shippo(apiKey);
+    shippoObj.set("version", shippoVersion);
     const getAddressListFiber = Meteor.wrapAsync(shippoObj.address.list, shippoObj.address);
     try {
       const addressList = getAddressListFiber();
@@ -62,6 +63,7 @@ ShippoApi.methods.getCarrierAccountsList = new ValidatedMethod({
   }).validator(),
   run({ apiKey }) {
     const shippoObj = new Shippo(apiKey);
+    shippoObj.set("version", shippoVersion);
 
     const getCarrierAccountsListFiber = Meteor.wrapAsync(shippoObj.carrieraccount.list, shippoObj.carrieraccount);
     try {
@@ -100,6 +102,7 @@ ShippoApi.methods.createShipment = new ValidatedMethod({
   }).validator(),
   run({ shippoAddressFrom, shippoAddressTo, shippoParcel, purpose, apiKey, carrierAccounts }) {
     const shippoObj = new Shippo(apiKey);
+    shippoObj.set("version", shippoVersion);
 
     const createShipmentFiber = Meteor.wrapAsync(shippoObj.shipment.create, shippoObj.shipment);
     try {
@@ -138,6 +141,7 @@ ShippoApi.methods.createTransaction = new ValidatedMethod({
   }).validator(),
   run({ rateId, apiKey }) {
     const shippoObj = new Shippo(apiKey);
+    shippoObj.set("version", shippoVersion);
 
     const createTransactionFiber = Meteor.wrapAsync(shippoObj.transaction.create, shippoObj.transaction);
     try {
@@ -178,6 +182,7 @@ ShippoApi.methods.getTransaction = new ValidatedMethod({
   }).validator(),
   run({ transactionId, apiKey }) {
     const shippoObj = new Shippo(apiKey);
+    shippoObj.set("version", shippoVersion);
 
     const retrieveTransactionFiber = Meteor.wrapAsync(shippoObj.transaction.retrieve, shippoObj.transaction);
     try {
