@@ -518,7 +518,7 @@ Meteor.methods({
     Logger.debug("cart/copyCartToOrder", cartId);
     // reassign the id, we'll get a new orderId
     order.cartId = cart._id;
-
+    order._id = cart._id;
     // a helper for guest login, we let guest add email afterwords
     // for ease, we'll also add automatically for logged in users
     if (order.userId && !order.email) {
@@ -548,7 +548,6 @@ Meteor.methods({
     delete order.cartTaxes;
     delete order.cartDiscounts;
     delete order.cartTotal;
-    delete order._id;
 
     // `order.shipping` is array ?
     if (Array.isArray(order.shipping)) {
@@ -592,42 +591,41 @@ Meteor.methods({
 
     order.billing[0].currency.exchangeRate = exchangeRate;
 
-
-    const expandedItems = [];
-
-    // init item level workflow
-    _.each(order.items, function (item) {
-      // Split items based on their quantity
-      for (let i = 0; i < item.quantity; i++) {
-        // Clone Item
-        const itemClone = _.clone(item);
-
-        // Remove the quantity since we'll be expanding each item as
-        // it's own record
-        itemClone.quantity = 1;
-
-        itemClone._id = Random.id();
-        itemClone.cartItemId = item._id; // used for transitioning inventry
-        itemClone.workflow = {
-          status: "new"
-        };
-
-        expandedItems.push(itemClone);
-
-        // Add each item clone to the first shipment
-        if (order.shipping[0].items) {
-          order.shipping[0].items.push({
-            _id: itemClone._id,
-            productId: itemClone.productId,
-            shopId: itemClone.shopId,
-            variantId: itemClone.variants._id
-          });
-        }
-      }
-    });
-
-    // Replace the items with the expanded array of items
-    order.items = expandedItems;
+    // const expandedItems = [];
+    //
+    // // init item level workflow
+    // _.each(order.items, function (item) {
+    //   // Split items based on their quantity
+    //   for (let i = 0; i < item.quantity; i++) {
+    //     // Clone Item
+    //     const itemClone = _.clone(item);
+    //
+    //     // Remove the quantity since we'll be expanding each item as
+    //     // it's own record
+    //     itemClone.quantity = 1;
+    //
+    //     itemClone._id = Random.id();
+    //     itemClone.cartItemId = item._id; // used for transitioning inventry
+    //     itemClone.workflow = {
+    //       status: "new"
+    //     };
+    //
+    //     expandedItems.push(itemClone);
+    //
+    //     // Add each item clone to the first shipment
+    //     if (order.shipping[0].items) {
+    //       order.shipping[0].items.push({
+    //         _id: itemClone._id,
+    //         productId: itemClone.productId,
+    //         shopId: itemClone.shopId,
+    //         variantId: itemClone.variants._id
+    //       });
+    //     }
+    //   }
+    // });
+    //
+    // // Replace the items with the expanded array of items
+    // order.items = expandedItems;
 
     if (!order.items || order.items.length === 0) {
       const msg = "An error occurred saving the order. Missing cart items.";
