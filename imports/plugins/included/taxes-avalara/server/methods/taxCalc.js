@@ -119,6 +119,7 @@ function avaGet(requestUrl, options = {}, testCredentials = true) {
     logObject.request = allOptions;
   }
 
+  let result;
   try {
     result = HTTP.get(requestUrl, allOptions);
   } catch (error) {
